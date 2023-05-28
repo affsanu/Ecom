@@ -3,7 +3,14 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
-export default function ProductForm({ _id, title: existingTitle, desc: existingDesc, price: existingPrice, type }) {
+export default function ProductForm({
+    _id,
+    title: existingTitle,
+    desc: existingDesc,
+    price: existingPrice,
+    type,
+    images,
+}) {
     const [title, setTitle] = useState(existingTitle || "");
     const [desc, setDesc] = useState(existingDesc || "");
     const [price, setPrice] = useState(existingPrice || "");
@@ -35,6 +42,12 @@ export default function ProductForm({ _id, title: existingTitle, desc: existingD
                 type="text"
                 placeholder={existingTitle}
             />
+            <label>Photos</label>
+            <div className="mb-2">
+                {!images?.length && (
+                    <div>No photos in this product.</div>
+                ) }
+            </div>
             <label>Description</label>
             <textarea
                 value={desc}

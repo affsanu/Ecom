@@ -24,7 +24,7 @@ export async function GET(req) {
   await dbConn();
 
   try {
-    const products = await Product.find();
+    const products = await Product.find().sort({_id: -1});
 
     return new Response(JSON.stringify(products), {
       status: 201,
