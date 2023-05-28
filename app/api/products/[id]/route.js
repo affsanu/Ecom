@@ -5,7 +5,7 @@ export async function GET(req, {params}) {
   await dbConn();
 
   try {
-    const id = params.id;
+    const id = await params.id;
 
     if (!id) {
         return new Response(JSON.stringify({ fail: "Params id not found!" }), {
@@ -19,6 +19,26 @@ export async function GET(req, {params}) {
       status: 201,
     });
 
+  } catch (error) {
+    return new Response(JSON.stringify({ fail: "Internal server error!" }), {
+      status: 500,
+    });
+  }
+}
+
+export async function DELETE(req, {params}) {
+  await dbConn();
+  try {
+    const  id  = await params.id;
+    if (!id) {
+      return new Response(JSON.stringify({ fail: "Params id not found!" }), {
+          status: 404,
+        });
+  }
+    await Product.findByIdAndDelete({ _id:id });
+    return new Response(JSON.stringify({ msg: "Product deleted!" }), {
+      status: 201,
+    });
   } catch (error) {
     return new Response(JSON.stringify({ fail: "Internal server error!" }), {
       status: 500,

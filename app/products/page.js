@@ -49,7 +49,7 @@ export default function Products() {
                   <PencilSquareIcon className="h-4 w-4"/>
                   Edit
                   </Link>
-                  <Link href={"/products/" + product._id}>
+                  <Link href={"/products/delete/" + product._id}>
                   <TrashIcon className="h-4 w-4"/>
                   Delete
                   </Link>
